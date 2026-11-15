@@ -53,5 +53,5 @@ def return_prediction(data: FeotusData):
     
     pred = model(torch.tensor(x_input))
     
-    probabilities = pred.softmax()
+    probabilities = torch.nn.functional.softmax(pred, dim=1)
     return {"probabilities": probabilities}
