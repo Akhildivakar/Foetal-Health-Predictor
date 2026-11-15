@@ -1,9 +1,8 @@
 import torch
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel
-
 from model import FourLayerFullyConnectedModelWithPReLU
+from pydantic import BaseModel
 
 app = FastAPI()
 
