@@ -22,6 +22,21 @@ class FeotusData(BaseModel):
     severeDeclerations: float
     prolonguedDecelerations: float
 
+    abnormalShortTermVariability: float
+    meanValueOfShortTermVariability: float
+    percentageOfTimeWithAbnormalLongTermVariability: float
+    meanValueOfLongTermVariability: float
+    histogramWidth: float
+    histogramMin: float
+    histogramMax: float
+    histogramNumberOfPeaks: float
+    histogramNumberOfZeros: float
+    histogramMode: float
+    histogramMean: float
+    histogramMedian: float
+    histogramVariance: float
+    histogramTendency: float
+
 
 @app.get("/api/health")
 def read_root():
