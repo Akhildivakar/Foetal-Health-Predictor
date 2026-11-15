@@ -25,8 +25,6 @@ The 3 classes are:
 * Pathological
 
 On the contrary, one drawback of this dataset was that the classes were imbalanced (there were a much larger number of normal records than suspect and pathological records).   
-This is the original dataset’s class distribution:  
-![][image1]
 
 To remedy this, we handled imbalanced classes by oversampling our data. This generated more data for the Suspect and Pathological classes to make each class have an equal number of samples. 
 
@@ -46,7 +44,7 @@ To test our model, we created an API with Fastapi, to provide an interface for o
 
 ## Results
 
-## ![][image2]
+## ![][]
 
 ## ***Fig.**  Test loss comparison of model versions*
 
