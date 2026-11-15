@@ -1,0 +1,12 @@
+label {
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+    gap: 1rem;
+}
+
+input {
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+}

@@ -1,0 +1,52 @@
+main {
+    background-color: #FEFCF2;
+    padding: 2rem 4rem;
+}
+
+main header h1 {
+    font-size: 36px;
+}
+
+main .inputGrid {
+    background-color: rgb(243, 243, 243);
+    padding: 2rem;
+    border-radius: 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem 2rem;
+}
+
+main .inputGrid button {
+    margin-top: 2rem;
+    height: 2.5rem;
+}
+
+@media (max-width: 1500px) {
+    main .inputGrid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 1000px) {
+    main .inputGrid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.results {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 1rem;
+    align-items: center;     /* vertical */
+  justify-items: center;   /* horizontal */
+}
+
+.results span {
+    height: 1rem;
+    margin: none;
+}
+
+progress {
+  width: 100%;
+  height: 16px;
+}
