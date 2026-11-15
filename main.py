@@ -1,3 +1,4 @@
+import torch
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
@@ -12,6 +13,26 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+class FourLayerFullyConnectedModelWithPReLU(torch.nn.Module):
+  # Four-Layer fully connected model with PReLU
+  def __init__(self):
+    super().__init__()
+    self.fc1 = torch.nn.Linear(21, 128)
+    self.relu1 = torch.nn.PReLU()
+    self.fc2 = torch.nn.Linear(128, 512)
+    self.relu2 = torch.nn.PReLU()
+    self.fc3 = torch.nn.Linear(512, 512)
+    self.relu3 = torch.nn.PReLU()
+    self.fc4 = torch.nn.Linear(512, 3)
+  def forward(self, x):
+    x = self.fc1(x)
+    x = self.relu1(x)
+    x = self.fc2(x)
+    x = self.relu2(x)
+    x = self.fc3(x)
+    x = self.relu3(x)
+    x = self.fc4(x)
+    return x
 
 class FeotusData(BaseModel):
     baselineValue: float
@@ -42,11 +63,11 @@ class FeotusData(BaseModel):
 def get_health():
     return {"status": "Up"}
 
-
+model = FourLayerFullyConnectedModelWithPReLU()
+model.load_state_dict("./model.pth")
 @app.post("/api/new")
 def return_prediction(data: FeotusData):
-    # Do stuff
-    print(data)
-
-    # Return 0=Normal, 1=Suspect, 2=Pathological
-    return {"result": 2}
+    x_input = [data.abnormalShortTermVariability, data.accelerators, data.baselineValue, data.fetalMovement, data.histogramMax, data.histogramMean, data.histogramMedian, data.histogramMin, data.histogramMode, data.histogramNumberOfPeaks, data.histogramNumberOfZeros, data.histogramTendency, data.histogramVariance, data.histogramWidth, data.lightDecelerations, data.meanValueOfLongTermVariability, data.meanValueOfShortTermVariability, data.percentageOfTimeWithAbnormalLongTermVariability, data.prolonguedDecelerations, data.severeDeclerations, data.uterineContractions]
+    pred = model(x_input)
+    probabilities = pred.softmax()
+    return {"result": probabilities}
