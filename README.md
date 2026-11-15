@@ -49,24 +49,32 @@ To test our model, we created an API with Fastapi, to provide an interface for o
 ***Fig.1**  Test loss comparison of model versions*
 
 ![](https://github.com/Akhildivakar/Foetal-Health-Predictor/blob/fdb8332a743bd3a6604fe79c35b559f268065d8c/images/Recall_Comparison.png)  
+
 ***Fig.2**  Recall comparison of model versions*
 
 ![](https://github.com/Akhildivakar/Foetal-Health-Predictor/blob/fdb8332a743bd3a6604fe79c35b559f268065d8c/images/Precision_Comparison.png) 
+
 ***Fig.3**  Precision comparison of model versions*
 
 ![](https://github.com/Akhildivakar/Foetal-Health-Predictor/blob/fdb8332a743bd3a6604fe79c35b559f268065d8c/images/Baseline_confusion.png)  
+
 ***Fig.4**  Confusion Matrix for 1-layer Fully Connected Model (Baseline)*
 
 ![](https://github.com/Akhildivakar/Foetal-Health-Predictor/blob/fdb8332a743bd3a6604fe79c35b559f268065d8c/images/FC_confusion.png) 
+
 ***Fig.5**  Confusion Matrix for 3-layer Fully Connected Model*
 
-![](https://github.com/Akhildivakar/Foetal-Health-Predictor/blob/fdb8332a743bd3a6604fe79c35b559f268065d8c/images/FCR_confusion.png)  
+![](https://github.com/Akhildivakar/Foetal-Health-Predictor/blob/fdb8332a743bd3a6604fe79c35b559f268065d8c/images/FCR_confusion.png) 
+
 ***Fig.6**  Confusion Matrix for 3-layer Fully Connected Model with ReLU*  
-![](https://github.com/Akhildivakar/Foetal-Health-Predictor/blob/fdb8332a743bd3a6604fe79c35b559f268065d8c/images/FCP_confusion.png)  
+![](https://github.com/Akhildivakar/Foetal-Health-Predictor/blob/fdb8332a743bd3a6604fe79c35b559f268065d8c/images/FCP_confusion.png) 
+
 ***Fig.7**  Confusion Matrix for 3-layer Fully Connected Model with PReLU*  
 ![](https://github.com/Akhildivakar/Foetal-Health-Predictor/blob/fdb8332a743bd3a6604fe79c35b559f268065d8c/images/FourLayer_Confusion.png) 
+
 ***Fig.8**  Confusion Matrix for 4-layer Fully Connected Model with PReLU*  
-![](https://github.com/Akhildivakar/Foetal-Health-Predictor/blob/fdb8332a743bd3a6604fe79c35b559f268065d8c/images/FiveLayer_Confusion.png) 
+![](https://github.com/Akhildivakar/Foetal-Health-Predictor/blob/fdb8332a743bd3a6604fe79c35b559f268065d8c/images/FiveLayer_Confusion.png)
+
 ***Fig.9**  Confusion Matrix for 5-layer Fully Connected Model with PReLU and Dropout Layers*
 
 ***Fig. 1*** shows a very large drop in test loss between the baseline model and the 3-layer model. This is likely due to the baseline model underfitting as it is too simple to capture the patterns in the data. As we started to implement activation layers such as ReLU and PReLU, the model loss showed another significant decrease from the 3-layer fully connected model without ReLU, suggesting that the 3-layer model experienced vanishing gradients which was solved by implementing ReLU/PReLU. The 4-layer model then showed the smallest test loss, while the test loss for the 5-layer model with Dropout was larger than the 4-layer model. This could either be due to the 5-layer model overfitting as it has too many parameters for the relatively small dataset, or could be due to the addition of dropout layers.
