@@ -42,7 +42,6 @@ class FeotusData(BaseModel):
     lightDecelerations: float
     severeDeclerations: float
     prolonguedDecelerations: float
-
     abnormalShortTermVariability: float
     meanValueOfShortTermVariability: float
     percentageOfTimeWithAbnormalLongTermVariability: float
@@ -67,7 +66,7 @@ model = FourLayerFullyConnectedModelWithPReLU()
 model.load_state_dict("./model.pth")
 @app.post("/api/new")
 def return_prediction(data: FeotusData):
-    x_input = [data.abnormalShortTermVariability, data.accelerators, data.baselineValue, data.fetalMovement, data.histogramMax, data.histogramMean, data.histogramMedian, data.histogramMin, data.histogramMode, data.histogramNumberOfPeaks, data.histogramNumberOfZeros, data.histogramTendency, data.histogramVariance, data.histogramWidth, data.lightDecelerations, data.meanValueOfLongTermVariability, data.meanValueOfShortTermVariability, data.percentageOfTimeWithAbnormalLongTermVariability, data.prolonguedDecelerations, data.severeDeclerations, data.uterineContractions]
+    x_input = [data.baselineValue, data.accelerators, data.fetalMovement, data.uterineContractions, data.lightDecelerations, data.severeDeclerations, data.prolonguedDecelerations, data.abnormalShortTermVariability, data.meanValueOfShortTermVariability, data.percentageOfTimeWithAbnormalLongTermVariability, data.histogramWidth, data.histogramMin, data.histogramMax, data.histogramNumberOfPeaks, data.histogramNumberOfZeros, data.histogramMode, data.histogramMean, data.histogramMedian, data.histogramVariance, data.histogramTendency]
     pred = model(x_input)
     probabilities = pred.softmax()
     return {"result": probabilities}
