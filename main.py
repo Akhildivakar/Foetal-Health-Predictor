@@ -3,6 +3,8 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
+from model import FourLayerFullyConnectedModelWithPReLU
+
 app = FastAPI()
 
 app.add_middleware(
@@ -13,28 +15,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-class FiveLayerFullyConnectedModelWithPReLUAndDropout(torch.nn.Module):
-  # Five-Layer fully connected model with PReLU and Dropout layers
-  def __init__(self):
-    super().__init__()
-    self.stack = torch.nn.Sequential([
-        torch.nn.Linear(21, 128),
-        torch.nn.PReLU(),
-        torch.nn.Dropout(0.5),
-        torch.nn.Linear(128, 512),
-        torch.nn.PReLU(),
-        torch.nn.Dropout(0.5),
-        torch.nn.Linear(512, 512),
-        torch.nn.PReLU(),
-        torch.nn.Dropout(0.5),
-        torch.nn.Linear(512, 128),
-        torch.nn.PReLU(),
-        torch.nn.Dropout(0.5),
-        torch.nn.Linear(128, 3)
-    ])
-  def forward(self, x):
-    x = self.stack(x)
-    return x
 
 class FeotusData(BaseModel):
     baselineValue: float
@@ -59,8 +39,8 @@ class FeotusData(BaseModel):
     histogramVariance: float
     histogramTendency: float
 
-model = FiveLayerFullyConnectedModelWithPReLUAndDropout()
-model.load_state_dict(torch.load("./model.pth", weights_only=False))
+model = FourLayerFullyConnectedModelWithPReLU()
+model.load_state_dict(torch.load("./model.pth", map_location="cpu"))
 model.eval()
 
 @app.get("/api/health")
@@ -69,7 +49,7 @@ def get_health():
 
 @app.post("/api/new")
 def return_prediction(data: FeotusData):
-    x_input = [data.baselineValue, data.accelerators, data.fetalMovement, data.uterineContractions, data.lightDecelerations, data.severeDeclerations, data.prolonguedDecelerations, data.abnormalShortTermVariability, data.meanValueOfShortTermVariability, data.percentageOfTimeWithAbnormalLongTermVariability, data.histogramWidth, data.histogramMin, data.histogramMax, data.histogramNumberOfPeaks, data.histogramNumberOfZeros, data.histogramMode, data.histogramMean, data.histogramMedian, data.histogramVariance, data.histogramTendency]
+    x_input = [data.baselineValue, data.accelerators, data.fetalMovement, data.uterineContractions, data.lightDecelerations, data.severeDeclerations, data.prolonguedDecelerations, data.abnormalShortTermVariability, data.meanValueOfShortTermVariability, data.percentageOfTimeWithAbnormalLongTermVariability, data.meanValueOfLongTermVariability, data.histogramWidth, data.histogramMin, data.histogramMax, data.histogramNumberOfPeaks, data.histogramNumberOfZeros, data.histogramMode, data.histogramMean, data.histogramMedian, data.histogramVariance, data.histogramTendency]
     
     pred = model(x_input)
     
