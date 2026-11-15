@@ -34,19 +34,16 @@ main .inputGrid button {
 }
 
 .results {
-    display: grid;
-    grid-template-columns: 100px 1fr;
+    display: flex;
     gap: 1rem;
     align-items: center;     /* vertical */
-  justify-items: center;   /* horizontal */
 }
 
 .results span {
     height: 1rem;
-    margin: none;
 }
 
 progress {
   width: 100%;
-  height: 16px;
+  height: 2.5rem;
 }

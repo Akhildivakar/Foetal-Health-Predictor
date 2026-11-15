@@ -89,6 +89,10 @@ export default function Main({ addFetous, updateFetous }) {
                             {labels[i].value}
                         </span>
 
+                        <span>
+                            {Math.round(prob * 100)}%
+                        </span>
+
                         <progress style={{accentColor: labels[i].color}} id="file" value="32" max="100"> 32% </progress>
                     </>
                 ))}
