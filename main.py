@@ -39,12 +39,12 @@ class FeotusData(BaseModel):
 
 
 @app.get("/api/health")
-def read_root():
+def get_health():
     return {"status": "Up"}
 
 
 @app.post("/api/new")
-def read_item(data: FeotusData):
+def return_prediction(data: FeotusData):
     # Do stuff
     print(data)
 
