@@ -57,16 +57,19 @@ class FeotusData(BaseModel):
     histogramVariance: float
     histogramTendency: float
 
+model = FourLayerFullyConnectedModelWithPReLU()
+model.load_state_dict(torch.load("./model.pth", weights_only=False))
+model.eval()
 
 @app.get("/api/health")
 def get_health():
     return {"status": "Up"}
 
-model = FourLayerFullyConnectedModelWithPReLU()
-model.load_state_dict("./model.pth")
 @app.post("/api/new")
 def return_prediction(data: FeotusData):
     x_input = [data.baselineValue, data.accelerators, data.fetalMovement, data.uterineContractions, data.lightDecelerations, data.severeDeclerations, data.prolonguedDecelerations, data.abnormalShortTermVariability, data.meanValueOfShortTermVariability, data.percentageOfTimeWithAbnormalLongTermVariability, data.histogramWidth, data.histogramMin, data.histogramMax, data.histogramNumberOfPeaks, data.histogramNumberOfZeros, data.histogramMode, data.histogramMean, data.histogramMedian, data.histogramVariance, data.histogramTendency]
+    
     pred = model(x_input)
+    
     probabilities = pred.softmax()
-    return {"result": probabilities}
+    return {"probabilities": probabilities}
