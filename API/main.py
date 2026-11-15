@@ -22,7 +22,7 @@ class FeotusData(BaseModel):
     uterineContractions: float
     lightDecelerations: float
     severeDeclerations: float
-    prolonguedDecelerations: float
+    prolongedDecelerations: float
     abnormalShortTermVariability: float
     meanValueOfShortTermVariability: float
     percentageOfTimeWithAbnormalLongTermVariability: float
@@ -48,9 +48,15 @@ def get_health():
 
 @app.post("/api/new")
 def return_prediction(data: FeotusData):
-    x_input = [data.baselineValue, data.accelerators, data.fetalMovement, data.uterineContractions, data.lightDecelerations, data.severeDeclerations, data.prolonguedDecelerations, data.abnormalShortTermVariability, data.meanValueOfShortTermVariability, data.percentageOfTimeWithAbnormalLongTermVariability, data.meanValueOfLongTermVariability, data.histogramWidth, data.histogramMin, data.histogramMax, data.histogramNumberOfPeaks, data.histogramNumberOfZeros, data.histogramMode, data.histogramMean, data.histogramMedian, data.histogramVariance, data.histogramTendency]
+    x_input = [data.baselineValue, data.accelerators, data.fetalMovement, data.uterineContractions, data.lightDecelerations, data.severeDeclerations, data.prolongedDecelerations, data.abnormalShortTermVariability, data.meanValueOfShortTermVariability, data.percentageOfTimeWithAbnormalLongTermVariability, data.meanValueOfLongTermVariability, data.histogramWidth, data.histogramMin, data.histogramMax, data.histogramNumberOfPeaks, data.histogramNumberOfZeros, data.histogramMode, data.histogramMean, data.histogramMedian, data.histogramVariance, data.histogramTendency]
     
     pred = model(torch.tensor(x_input))
     
-    probabilities = torch.nn.functional.softmax(pred, dim=1)
-    return {"probabilities": probabilities}
+    probabilities = torch.nn.functional.softmax(pred, dim=0).tolist()
+    print(probabilities)
+
+    return {
+        "normal": probabilities[0],
+        "suspect": probabilities[1],
+        "pathological": probabilities[2]
+    }
