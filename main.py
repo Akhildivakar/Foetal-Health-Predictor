@@ -51,7 +51,7 @@ def get_health():
 def return_prediction(data: FeotusData):
     x_input = [data.baselineValue, data.accelerators, data.fetalMovement, data.uterineContractions, data.lightDecelerations, data.severeDeclerations, data.prolonguedDecelerations, data.abnormalShortTermVariability, data.meanValueOfShortTermVariability, data.percentageOfTimeWithAbnormalLongTermVariability, data.meanValueOfLongTermVariability, data.histogramWidth, data.histogramMin, data.histogramMax, data.histogramNumberOfPeaks, data.histogramNumberOfZeros, data.histogramMode, data.histogramMean, data.histogramMedian, data.histogramVariance, data.histogramTendency]
     
-    pred = model(x_input)
+    pred = model(torch.tensor(x_input))
     
     probabilities = pred.softmax()
     return {"probabilities": probabilities}
