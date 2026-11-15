@@ -55,7 +55,7 @@ export default function Main({ addFetous, updateFetous }) {
                         <Input id="uterineContractions" label="Uterine Contractions" />
                         <Input id="lightDecelerations" label="Light Decelerations" />
                         <Input id="severeDeclerations" label="Severe Decelerations" />
-                        <Input id="prolonguedDecelerations" label="Prolongued Decelerations" />
+                        <Input id="prolongedDecelerations" label="Prolonged Decelerations" />
                         <Input id="abnormalShortTermVariability" label="Abnormal Short Term Variability" />
                         <Input id="meanValueOfShortTermVariability" label="Mean Value Of Short Term Variability" />
                         <Input id="percentageOfTimeWithAbnormalLongTermVariability" label="Percentage Of Time With Abnormal Long Term Variability" />
@@ -93,7 +93,7 @@ export default function Main({ addFetous, updateFetous }) {
                             {Math.round(prob * 100)}%
                         </span>
 
-                        <progress style={{accentColor: labels[i].color}} id="file" value="32" max="100"> 32% </progress>
+                        <progress style={{accentColor: labels[i].color}} id="file" value={Math.round(prob * 100)} max="100"> {Math.round(prob * 100)}% </progress>
                     </>
                 ))}
                 </div>

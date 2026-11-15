@@ -12,7 +12,7 @@ export async function submit(formData) {
         uterineContractions: parseFloat(formData.get("uterineContractions")),
         lightDecelerations: parseFloat(formData.get("lightDecelerations")),
         severeDeclerations: parseFloat(formData.get("severeDeclerations")),
-        prolonguedDecelerations: parseFloat(formData.get("prolonguedDecelerations")),
+        prolongedDecelerations: parseFloat(formData.get("prolongedDecelerations")),
         abnormalShortTermVariability: parseFloat(formData.get("abnormalShortTermVariability")),
         meanValueOfShortTermVariability: parseFloat(formData.get("meanValueOfShortTermVariability")),
         percentageOfTimeWithAbnormalLongTermVariability: parseFloat(formData.get("percentageOfTimeWithAbnormalLongTermVariability")),
