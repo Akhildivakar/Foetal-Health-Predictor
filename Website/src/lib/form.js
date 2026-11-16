@@ -31,7 +31,7 @@ export async function submit(formData) {
 
     console.log(data);
 
-    const response = await fetch(`${process.env.REACT_APP_API_URL}/new`, {
+    const response = await fetch(`http://localhost:8000/api/new`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -40,7 +40,7 @@ export async function submit(formData) {
     });
 
     const { normal, suspect, pathological } = await response.json();
-    
+    console.log(normal)
     const probabilities = [normal, suspect, pathological];
     console.log(probabilities);
 

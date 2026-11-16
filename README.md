@@ -44,6 +44,21 @@ To begin, we started by training and testing a one-layer fully connected baselin
 
 To test our model, we created an API with Fastapi, to provide an interface for our model. We then made a website with React.js, allowing us to input data and see the results. We chose this stack as it was a quick and efficient way to test our model in a real world environment.
 
+## How to run
+1. Clone the respository.
+2. Inside the API folder, run the following command:
+```bash
+python -m fastapi dev
+```
+3. Inside another terminal window, while the API is running. In the Website folder, run the following commands:
+```bash
+npm install
+npm run start
+```
+4. Open localhost:3000 in a browser, and you should see the website running.
+
+If the submission is stuck processing, make sure your FastAPI url is set to http://localhost:8000.
+
 ## Results
 
 ## ![](https://github.com/Akhildivakar/Foetal-Health-Predictor/blob/fdb8332a743bd3a6604fe79c35b559f268065d8c/images/Test_Loss_Comparison.png)
