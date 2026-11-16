@@ -57,7 +57,7 @@ npm run start
 ```
 4. Open localhost:3000 in a browser, and you should see the website running.
 
-If the submission is stuck processing, make sure your FastAPI url is set to http://localhost:8000.
+If the submission is stuck processing, make sure your FastAPI URL is set to http://localhost:8000.
 
 ## Results
 
